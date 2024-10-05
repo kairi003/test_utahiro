@@ -7,8 +7,7 @@ services:
     command: python3 /workdir/app/main.py
 
   dev:
-    build: .
-    image: ${IMAGE_NAME:-utahiro-calendar}
+    image: ghcr.io/kairi003/utahiro-calendar:3
     volumes:
       - .:/workdir
       - /mnt/wslg:/mnt/wslg

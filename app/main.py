@@ -68,7 +68,7 @@ def main():
         context = browser.new_context(**context_params)
         context.set_default_timeout(30000)
         def on_request(route):
-            print('request:', route)
+            # print('request:', route)
             route.continue_()
         context.route("**/*", on_request)
         page = context.new_page()
