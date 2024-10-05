@@ -69,7 +69,7 @@ def main():
         }
         context = browser.new_context(**context_params)
         # context.set_default_timeout(10000)
-        context.route("**/*", lambda route: route.abort() if route.request.resource_type in "image" else route.continue_())
+        # context.route("**/*", lambda route: route.abort() if route.request.resource_type in "image" else route.continue_())
         page = context.new_page()
         logger.debug('start page')
 
@@ -99,6 +99,7 @@ def main():
             #     logger.info('event date is past')
             #     break
             el.evaluate('el=>el.scrollIntoView(true)')
+            page.screenshot(path=f'screenshot_{i}.png')
             
 
         browser.close()
