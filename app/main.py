@@ -68,7 +68,7 @@ def main():
             'viewport': { 'width': 500, 'height': 3000 }
         }
         context = browser.new_context(**context_params)
-        context.set_default_timeout(10000)
+        context.set_default_timeout(30000)
         # context.route("**/*", lambda route: route.abort() if route.request.resource_type in "image" else route.continue_())
         page = context.new_page()
         logger.debug('start page')
