@@ -65,7 +65,7 @@ def main():
         context_params = {
             'user_agent': USER_AGENT,
             'locale': 'ja-JP',
-            'viewport': { 'width': 500, 'height': 5000 }
+            'viewport': { 'width': 500, 'height': 1000 }
         }
         context = browser.new_context(**context_params)
         context.set_default_timeout(10000)
@@ -76,9 +76,17 @@ def main():
         page.goto(PAGE_URL, wait_until="domcontentloaded")
 
         page.wait_for_selector('[aria-label="閉じる"]').click()
+        page.screenshot(path=f'artifacts/ss_000.png')
+        with open('artifacts/page_000.html', 'w') as f:
+            f.write(page.content())
 
         for i in range(1, 20):
             el = page.wait_for_selector(f'[aria-posinset="{i}"]')
+
+            page.screenshot(path=f'artifacts/ss_{i:03d}.png')
+            with open(f'artifacts/page_{i:03d}.html', 'w') as f:
+                f.write(page.content())
+
             date_text_query = ':not([data-ad-preview="message"]) a[aria-label][href^="https://www.facebook.com/karaoke.utahiroba/posts/"]'
             date_text = el.wait_for_selector(date_text_query).text_content()
             message_text = el.wait_for_selector('[data-ad-preview="message"]').text_content()
@@ -99,7 +107,6 @@ def main():
             #     logger.info('event date is past')
             #     break
             el.evaluate('el=>el.scrollIntoView(true)')
-            page.screenshot(path=f'screenshots/screenshot_{i}.png')
             
 
         browser.close()

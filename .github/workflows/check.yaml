@@ -40,5 +40,5 @@ jobs:
         if: ${{ steps.run_app.outcome == 'failure' }}
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots
-          path: screenshots
+          name: artifacts
+          path: artifacts
