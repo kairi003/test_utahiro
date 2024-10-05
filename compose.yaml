@@ -1,7 +1,6 @@
 services:  
   app:
-    build: .
-    image: ${IMAGE_NAME:-utahiro-calendar}
+    image: ghcr.io/kairi003/utahiro-calendar:3
     volumes:
       - .:/workdir
     env_file: .env

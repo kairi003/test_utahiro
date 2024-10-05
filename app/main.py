@@ -13,7 +13,7 @@ from playwright.sync_api import sync_playwright
 from register import register_event
 
 JST = dt.timezone(dt.timedelta(hours=+9), 'JST')
-USER_AGENT = os.environ['USER_AGENT']
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
 PAGE_URL = os.environ['PAGE_URL']
 EVENT_LOG = 'event.log'
 
@@ -106,12 +106,12 @@ def main():
             event_date = post_dt and get_event_date(message_text, post_dt)
             if event_date is None:
                 logger.info('skip post')
-            elif event_date >= dt.date.today():
-                update_event_log(event_date)
-                logger.info('update event log')
-            else:
-                logger.info('event date is past')
-                break
+            # elif event_date >= dt.date.today():
+            #     # update_event_log(event_date)
+            #     logger.info('update event log')
+            # else:
+            #     logger.info('event date is past')
+            #     break
             el.evaluate('el=>el.scrollIntoView(true)')
             
 
