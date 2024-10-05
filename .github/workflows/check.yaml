@@ -36,8 +36,8 @@ jobs:
         run: docker compose run app
 
       - name: Upload Artifact
+        if: ${{ steps.run_app.outcome == 'failure' }}
         uses: actions/upload-artifact@v4
-        if: if: ${{ steps.run_app.outcome == 'failure' }}
         with:
           name: screenshots
           path: screenshots
