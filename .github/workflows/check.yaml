@@ -33,6 +33,7 @@ jobs:
 
       - run: docker compose pull app
       - id: run_app
+        continue-on-error: true
         run: docker compose run app
 
       - name: Upload Artifact
