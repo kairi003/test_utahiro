@@ -10,7 +10,6 @@ from distutils.util import strtobool
 from logging import basicConfig, getLogger
 
 from playwright.sync_api import sync_playwright
-from register import register_event
 
 JST = dt.timezone(dt.timedelta(hours=+9), 'JST')
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
