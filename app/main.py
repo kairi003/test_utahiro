@@ -65,7 +65,7 @@ def main():
         context_params = {
             'user_agent': USER_AGENT,
             'locale': 'ja-JP',
-            'viewport': { 'width': 500, 'height': 1000 }
+            'viewport': { 'width': 500, 'height': 3000 }
         }
         context = browser.new_context(**context_params)
         context.set_default_timeout(10000)
@@ -80,7 +80,7 @@ def main():
         with open('artifacts/page_000.html', 'w') as f:
             f.write(page.content())
 
-        for i in range(1, 20):
+        for i in range(1, 5):
             el = page.wait_for_selector(f'[aria-posinset="{i}"]')
 
             page.screenshot(path=f'artifacts/ss_{i:03d}.png')
