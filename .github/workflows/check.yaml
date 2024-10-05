@@ -31,6 +31,5 @@ jobs:
           CALENDAR_ID: ${{ vars.CALENDAR_ID }}
           PAGE_URL: ${{ secrets.PAGE_URL }}
 
-      - name: Check event
-        run: docker compose run app
-
+      - run: docker compose pull app
+      - run: docker compose run app

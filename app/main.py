@@ -26,21 +26,6 @@ logger = getLogger(__name__)
 HEADLESS = bool(strtobool(os.getenv("HEADLESS", "true")))
 
 
-def update_event_log(event_date: dt.date) -> bool:
-    with open(EVENT_LOG, 'r+') as f:
-        try:
-            last = f.readlines().pop()
-        except IndexError:
-            last = ''
-        currnt = event_date.isoformat()
-        if last < currnt:
-            f.write(currnt+'\n')
-            event = register_event(event_date)
-            logger.info(f'event registered: {event}')
-        else:
-            logger.info('event already registered')
-
-
 def get_post_date(text: str) -> dt.datetime | None:
     m: re.Match
     if m := re.match(r'(?P<num>\d+)(?P<unit>秒|分|時間|日)前', text):
