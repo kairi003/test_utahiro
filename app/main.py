@@ -90,6 +90,8 @@ def main():
             event_date = post_dt and get_event_date(message_text, post_dt)
             if event_date is None:
                 logger.info('skip post')
+            else:
+                logger.info(f'{event_date=}')
             # elif event_date >= dt.date.today():
             #     # update_event_log(event_date)
             #     logger.info('update event log')
