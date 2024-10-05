@@ -16,9 +16,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, li
 PAGE_URL = os.environ['PAGE_URL']
 EVENT_LOG = 'event.log'
 
-LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()
-if LOG_LEVEL not in ('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'):
-    LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'DEBUG'
 basicConfig(level=LOG_LEVEL, stream=sys.stderr)
 logger = getLogger(__name__)
 
@@ -69,11 +67,16 @@ def main():
         }
         context = browser.new_context(**context_params)
         context.set_default_timeout(30000)
-        # context.route("**/*", lambda route: route.abort() if route.request.resource_type in "image" else route.continue_())
+        def on_request(route):
+            print('request:', route)
+            route.continue_()
+        context.route("**/*", on_request)
         page = context.new_page()
         logger.debug('start page')
 
         page.goto(PAGE_URL, wait_until="domcontentloaded")
+
+        page.on("console", lambda msg: print('console:', msg))
         
         page.screenshot(path=f'artifacts/ss_000.png')
         with open('artifacts/page_000.html', 'w') as f:
