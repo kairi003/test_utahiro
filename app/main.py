@@ -74,11 +74,12 @@ def main():
         logger.debug('start page')
 
         page.goto(PAGE_URL, wait_until="domcontentloaded")
-
-        page.wait_for_selector('[aria-label="閉じる"]').click()
+        
         page.screenshot(path=f'artifacts/ss_000.png')
         with open('artifacts/page_000.html', 'w') as f:
             f.write(page.content())
+
+        page.wait_for_selector('[aria-label="閉じる"]').click()
 
         for i in range(1, 5):
             el = page.wait_for_selector(f'[aria-posinset="{i}"]')
